@@ -57,10 +57,12 @@ class App1 extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.upgrade == this.props.upgrade) {
+    debugger;
+    if (nextProps.dashboard == this.props.dashboard) {
       return;
     }
 
+    debugger;
     const { dashboard: { equipmentPositions } } = this.props;
     this.setState({ equipmentPositionsSrc: equipmentPositions, equipmentPositions: equipmentPositions});
   }

@@ -79,22 +79,6 @@ export default defineConfig({
               authority: ['admin']
             },
             {
-              path: '/admin',
-              name: 'admin',
-              icon: 'icon-deploymentunit',
-              component: './Admin',
-              authority: ['admin'],
-              routes: [
-                {
-                  path: '/admin/sub-page',
-                  name: 'sub-page',
-                  icon: 'smile',
-                  component: './Welcome',
-                  authority: ['admin'],
-                },
-              ],
-            },
-            {
               name: '用户信息',
               path: '/userinfo',
               component: './UserInfo',

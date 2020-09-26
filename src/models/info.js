@@ -14,6 +14,7 @@ export default {
     extendSensor: [],
     installInfo: [],
     management: [],
+    managementTitle: {},
   },
 
   effects: {
@@ -31,11 +32,11 @@ export default {
         yield call(send, params, defaultSettings.socketUrl);
     },
 
-    *getList({ payload },{ call }) {
+    *getManagement({ payload },{ call }) {
       const params = {
-        msgid: 30,
+        msgid: 60,
         dt: moment(new Date()).format('YYYYMMDDhhmmss'),
-        ui_id: 'widget_20',
+        ui_id: 'widget_60',
         did: payload.sn
       };
       yield call(send, params, defaultSettings.socketUrl);
@@ -79,12 +80,12 @@ export default {
         }
         return state;
       }
-      else if (data.msgid == "41") {
+      else if (data.msgid == "60") {
         if (data.widget) {
           return {
             ...state,
-            titles: data.widget.list_title,
-            list: data.widget.list_value,
+            management: data.widget.list,
+            managementTitle: data.widget.title,
           }
         }
 

@@ -7,7 +7,7 @@ const pageIds = {
   login: [10],
   dashboard: [20, 21, 22],
   equipmentList: [20, 30],
-  equipmentInfo: [41, 50],
+  equipmentInfo: [60, 50],
   history: [70, 71],
   upgrade: [40, 41],
   userInfo: [80],
@@ -110,7 +110,6 @@ export default {
         return {
           ...state,
           equipmentPositions: positions,
-          //equipmentPositions: [{position: {longitude: 100, latitude: 30, status_icon: "02-dev-status-01.png"}}]
         }
       }
 
