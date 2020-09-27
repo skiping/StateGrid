@@ -124,19 +124,19 @@ class App2 extends React.Component {
           <div className={styles.info}>
             <span>
               所有设备总数&nbsp;
-              <Button type="primary" shape="round" style={{width: 100, background: '#016EFF'}}>
+              <Button type="primary" shape="round" style={{width: 100, background: '#016EFF', border: 'none'}}>
                   {equipmentInfo.all}
               </Button>
             </span>
             <span>
               报警设备总数&nbsp;
-              <Button type="primary" shape="round" style={{width: 100, background: '#FF322B'}}>
+              <Button type="primary" shape="round" style={{width: 100, background: '#FF322B', border: 'none'}}>
                   {equipmentInfo.warning}
               </Button>
             </span>     
             <span>
               预警设备总数&nbsp;
-              <Button type="primary" shape="round" style={{width: 100, background: '#FF8A04'}}>
+              <Button type="primary" shape="round" style={{width: 100, background: '#FF8A04', border: 'none'}}>
                   {equipmentInfo.earlyWarning}
               </Button>
             </span>               

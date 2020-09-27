@@ -1,5 +1,6 @@
 import React from 'react';
-import { Card, Col, Row,Button } from 'antd';
+import { Card, Col, Row, Button, Input, Form, Tooltip, Select } from 'antd';
+const { Option } = Select;
 import { connect } from 'dva';
 import styles from './style.less';
 
@@ -38,8 +39,22 @@ class EInfo extends React.Component {
           }
         });
       }
+    }
 
-      
+    onFinish = (values) => {
+      console.log('Success:', values);
+
+      const { dispatch } = this.props;
+      if (!dispatch) return;
+
+      //设备管理
+      dispatch({
+        type: 'info/setManagement',
+        payload: {
+          list: values,
+        }
+      });
+
     }
   
     render() {
@@ -70,16 +85,56 @@ class EInfo extends React.Component {
       });
 
       const managementItems = management.map((x, i) => {
-          if (x.value_list.indexOf(x.value) != -1) {
-            return <div className={styles.infoItem} key={i}><span>{x.title}</span>
-                      {x.value} {x.value_unit}
-                   </div>
+          if (x.value_list.indexOf(x.value) == -1) {
+            return  <Form.Item label={x.title}  labelAlign="left" key={i}>
+                      <Form.Item
+                        name={"input_" + i}
+                        noStyle
+                        initialValue = {x.value}
+                        rules={[{ required: true, message: '请输入' + x.title }]}
+                      >
+                        <Input style={{ width: 120 }}  />
+                      </Form.Item>
+                      <Tooltip title="Useful information" >
+                          <span style={{marginLeft: 20}}>{x.value_unit}</span>
+                      </Tooltip>
+                    </Form.Item>
+
           }
           else {
-
+          const options = x.value_list.map((v, i) => <Option value={v} key={i}>{v}</Option>);
+            return  <Form.Item label={x.title}  labelAlign="left" key={i}>
+                      <Form.Item
+                        name={"input_" + i}
+                        noStyle
+                        initialValue = {x.value}
+                        rules={[{ required: true, message: '请选择' + x.title }]}
+                      >
+                        <Select style={{ width: 120 }}>
+                        {options}</Select>
+                      </Form.Item>
+                      <Tooltip title="Useful information" >
+                        <span style={{marginLeft: 20}}>{x.value_unit}</span>
+                      </Tooltip>
+                    </Form.Item>
           }
         }
       );
+
+      const layout = {
+        labelCol: {
+          span: 4,
+        },
+        wrapperCol: {
+          span: 8,
+        },
+      };
+
+      const tailLayout = {
+        wrapperCol: {
+          span: 24,
+        },
+      };
 
       return (
         <div>
@@ -108,15 +163,24 @@ class EInfo extends React.Component {
 
               <Card title={React.createElement('div',  {className: styles.managementTiile}, "设备管理")}
                     bordered={false} style={{ marginTop: 20}} size='small'>
-                {managementItems}
-                <div className={styles.infoItem}>
-                  <span>
-                    <Button type="primary" shape="round" style={{width: 100, background: '#016EFF'}}>
-                          设置
+
+
+                <Form
+                  {...layout}
+                  name="management_box"
+                  onFinish={this.onFinish}
+                  //onFinishFailed={onFinishFailed}
+                >
+                  {managementItems}
+
+                  <Form.Item {...tailLayout}>
+                    <Button type="primary" htmlType="submit" shape="round" style={{width: 100, background: '#016EFF'}}>
+                      设置
                     </Button>
-                  </span>
-                  <label style={{color: 'grey'}}>{managementTitle.title_udt} 设置成功</label>
-                </div>
+
+                    <label className={styles.setSuccess} style={{color: 'grey'}}>{managementTitle.title_udt} 设置成功</label>
+                  </Form.Item>
+                </Form>
               </Card>
             </Col>
           </Row>

@@ -41,7 +41,7 @@ const Login = (props) => {
 
           <UserName
             name="userName"
-            placeholder="用户名: admin or user"
+            placeholder="用户名"
             rules={[
               {
                 required: true,
@@ -51,7 +51,7 @@ const Login = (props) => {
           />
           <Password
             name="password"
-            placeholder="密码: ant.design"
+            placeholder="密码"
             rules={[
               {
                 required: true,
@@ -68,8 +68,10 @@ const Login = (props) => {
             style={{
               float: 'right',
             }}
+            target='_blank'
+            href='http://www.windsbridge.com/w9099-90/help.html'
           >
-            忘记密码
+            帮助
           </a>
         </div>
         <Submit loading={submitting}>登录</Submit>

@@ -41,6 +41,27 @@ export default {
       };
       yield call(send, params, defaultSettings.socketUrl);
     },
+
+    *setManagement({ payload },{ call, select }) {
+      debugger;
+      const management = yield select(state => state.info.management);
+      const setList = payload.list || {};
+
+      const list = management.map((x, i) => {
+        return {
+          title: x.title,
+          value: setList["input_" + i],
+          value_info: x.value_unit
+        };
+      });
+ 
+      const params = {
+        msgid: 61,
+        dt: moment(new Date()).format('YYYYMMDDhhmmss'),
+        list: list,
+      };
+      yield call(send, params, defaultSettings.socketUrl);
+    }
   },
 
   reducers: {

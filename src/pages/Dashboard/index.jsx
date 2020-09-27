@@ -154,26 +154,30 @@ class App1 extends React.Component {
                 <Card title={React.createElement('div',  {className: styles.title}, "设备状况")}
                         bordered={false} style={{ height: 280}} size='small'>
                   <p>
-                    所有设备总数： 
-                    <Button type="primary" shape="round" style={{width: 100, background: equipmentInfo.all.val_bcolor}}>
+                    所有设备总数&nbsp; &nbsp;    
+                    <Button type="primary" shape="round" 
+                      style={{width: 100, background: equipmentInfo.all.val_bcolor, border: 'none'}}>
                         {equipmentInfo.all.val}
                     </Button>
                   </p>
                   <p>
-                    在线设备总数： 
-                    <Button type="primary" shape="round" style={{width: 100, background: equipmentInfo.online.val_bcolor}}>
+                    在线设备总数&nbsp; &nbsp;    
+                    <Button type="primary" shape="round" 
+                      style={{width: 100, background: equipmentInfo.online.val_bcolor, border: 'none'}}>
                         {equipmentInfo.online.val}
                     </Button>
                   </p>
                   <p>
-                    离线设备总数： 
-                    <Button type="primary" shape="round" style={{width: 100, background: equipmentInfo.offline.val_bcolor}}>
+                    离线设备总数&nbsp; &nbsp;    
+                    <Button type="primary" shape="round" 
+                      style={{width: 100, background: equipmentInfo.offline.val_bcolor, border: 'none'}}>
                         {equipmentInfo.offline.val}
                     </Button>
                   </p>
                   <p>
-                    报警设备总数： 
-                    <Button type="primary" shape="round" style={{width: 100, background: equipmentInfo.warning.val_bcolor}}>
+                    报警设备总数&nbsp; &nbsp;    
+                    <Button type="primary" shape="round" 
+                      style={{width: 100, background: equipmentInfo.warning.val_bcolor, border: 'none'}}>
                         {equipmentInfo.warning.val}
                     </Button>
                     <span className={styles.addressIcon} style={{color: '#FF322B'}}>
@@ -181,8 +185,9 @@ class App1 extends React.Component {
                     </span>
                   </p>
                   <p>
-                    预警设备总数： 
-                    <Button type="primary" shape="round" style={{width: 100, background: equipmentInfo.earlyWarning.val_bcolor}}>
+                    预警设备总数&nbsp; &nbsp;   
+                    <Button type="primary" shape="round" 
+                      style={{width: 100, background: equipmentInfo.earlyWarning.val_bcolor, border: 'none'}}>
                         {equipmentInfo.earlyWarning.val}
                     </Button>
                     <span className={styles.addressIcon} style={{color: '#FF8A04'}}>
