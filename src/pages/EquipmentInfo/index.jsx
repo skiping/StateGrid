@@ -69,8 +69,17 @@ class EInfo extends React.Component {
         return <div className={styles.infoItem} key={i}><span>{x.title}</span>{x.value}</div>
       });
 
-      const managementItems = management.map((x, i) => 
-        <div className={styles.infoItem} key={i}><span>{x.title}</span>{x.value} {x.value_unit}</div>);
+      const managementItems = management.map((x, i) => {
+          if (x.value_list.indexOf(x.value) != -1) {
+            return <div className={styles.infoItem} key={i}><span>{x.title}</span>
+                      {x.value} {x.value_unit}
+                   </div>
+          }
+          else {
+
+          }
+        }
+      );
 
       return (
         <div>
@@ -87,17 +96,17 @@ class EInfo extends React.Component {
                 {installInfoItems}
               </Card>
 
-              <Card title={React.createElement('div',  {className: styles.installTiile}, "基本传感器信息")}
+              <Card title={React.createElement('div',  {className: styles.baseSensorTiile}, "基本传感器信息")}
                     bordered={false} style={{ marginTop: 20 }} size='small'>
                 {baseSensorItems}
               </Card>
 
-              <Card title={React.createElement('div',  {className: styles.infoTiile}, "扩展传感器信息")}
+              <Card title={React.createElement('div',  {className: styles.extendSensorTiile}, "扩展传感器信息")}
                     bordered={false} style={{ marginTop: 20 }} size='small'>
                 {extendSensorItems}
               </Card>
 
-              <Card title={React.createElement('div',  {className: styles.installTiile}, "设备管理")}
+              <Card title={React.createElement('div',  {className: styles.managementTiile}, "设备管理")}
                     bordered={false} style={{ marginTop: 20}} size='small'>
                 {managementItems}
                 <div className={styles.infoItem}>
