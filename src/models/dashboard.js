@@ -104,8 +104,8 @@ export default {
       else if (data.msgid == "22") {
         let positions = [];
         data.widget.list.filter(x => {
-          x.longitude = x.lat;
-          x.latitude = x.lng;
+          x.longitude = x.lng;
+          x.latitude = x.lat;
           positions.push({position: x});
         });
 
