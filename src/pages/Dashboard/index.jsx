@@ -57,13 +57,11 @@ class App1 extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    debugger;
     if (nextProps.dashboard == this.props.dashboard) {
       return;
     }
 
-    debugger;
-    const { dashboard: { equipmentPositions } } = this.props;
+    const { dashboard: { equipmentPositions } } = nextProps;
     this.setState({ equipmentPositionsSrc: equipmentPositions, equipmentPositions: equipmentPositions});
   }
 
@@ -77,6 +75,8 @@ class App1 extends React.Component {
     }
     this.mapCenter = {longitude: 115, latitude: 40};
     this.search = this.search.bind(this);
+    this.showEarlyWarning = this.showEarlyWarning.bind(this);
+    this.showWarning = this.showWarning.bind(this);
 
     this.markersEvents = {
       click: (MapsOption, marker) => {   
@@ -116,6 +116,9 @@ class App1 extends React.Component {
     else if (extData.position.status_icon == "02-dev-status-04.png") {
       return <div className={styles.status}><img src= {require('../../assets/02-dev-status-04.png')} width="30" /></div>
     }
+    else if (extData.position.status_icon == "02-dev-status-05.png") {
+      return <div className={styles.status}><img src= {require('../../assets/02-dev-status-05.png')} width="30" /></div>
+    }
   }
 
   onStartSNChange = event => {
@@ -127,12 +130,12 @@ class App1 extends React.Component {
   };
 
   showEarlyWarning = () => {
-    const positions = this.state.equipmentPositionsSrc.filter(x => x.status_icon.indexOf("status-03") > -1)
+    const positions = this.state.equipmentPositionsSrc.filter(x => x.position.status_icon.indexOf("status-03") > -1)
     this.setState({equipmentPositions: positions});
   };
 
   showWarning = () => {
-    const positions = this.state.equipmentPositionsSrc.filter(x => x.status_icon.indexOf("status-05") > -1)
+    const positions = this.state.equipmentPositionsSrc.filter(x => x.position.status_icon.indexOf("status-05") > -1)
     this.setState({equipmentPositions: positions});
   };
 
@@ -149,23 +152,29 @@ class App1 extends React.Component {
           <Row gutter={16}>
               <Col span={8}>
                 <Card title={React.createElement('div',  {className: styles.title}, "设备状况")}
-                        bordered={false} style={{ height: 240}} size='small'>
+                        bordered={false} style={{ height: 280}} size='small'>
                   <p>
                     所有设备总数： 
-                    <Button type="primary" shape="round" style={{width: 100, background: '#016EFF'}}>
-                        {equipmentInfo.all}
+                    <Button type="primary" shape="round" style={{width: 100, background: equipmentInfo.all.val_bcolor}}>
+                        {equipmentInfo.all.val}
+                    </Button>
+                  </p>
+                  <p>
+                    在线设备总数： 
+                    <Button type="primary" shape="round" style={{width: 100, background: equipmentInfo.online.val_bcolor}}>
+                        {equipmentInfo.online.val}
                     </Button>
                   </p>
                   <p>
                     离线设备总数： 
-                    <Button type="primary" shape="round" style={{width: 100, background: '#5B5B5B'}}>
-                        {equipmentInfo.offline}
+                    <Button type="primary" shape="round" style={{width: 100, background: equipmentInfo.offline.val_bcolor}}>
+                        {equipmentInfo.offline.val}
                     </Button>
                   </p>
                   <p>
                     报警设备总数： 
-                    <Button type="primary" shape="round" style={{width: 100, background: '#FF322B'}}>
-                        {equipmentInfo.warning}
+                    <Button type="primary" shape="round" style={{width: 100, background: equipmentInfo.warning.val_bcolor}}>
+                        {equipmentInfo.warning.val}
                     </Button>
                     <span className={styles.addressIcon} style={{color: '#FF322B'}}>
                       <EnvironmentOutlined onClick={this.showWarning} />
@@ -173,8 +182,8 @@ class App1 extends React.Component {
                   </p>
                   <p>
                     预警设备总数： 
-                    <Button type="primary" shape="round" style={{width: 100, background: '#FF8A04'}}>
-                        {equipmentInfo.earlyWarning}
+                    <Button type="primary" shape="round" style={{width: 100, background: equipmentInfo.earlyWarning.val_bcolor}}>
+                        {equipmentInfo.earlyWarning.val}
                     </Button>
                     <span className={styles.addressIcon} style={{color: '#FF8A04'}}>
                         <EnvironmentOutlined onClick={this.showEarlyWarning} />
@@ -184,7 +193,7 @@ class App1 extends React.Component {
               </Col>
               <Col span={16}>
                 <Card title={React.createElement('div',  {className: styles.warnTitle}, "报警列表")}
-                      bordered={false} style={{ height: 240, overflow: 'auto' }} size='small'>
+                      bordered={false} style={{ height: 280, overflow: 'auto' }} size='small'>
                   <Table
                     bordered
                     pagination={false}

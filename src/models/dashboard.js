@@ -20,10 +20,11 @@ export default {
     data: moment(new Date()).format("YYYY-MM-DD"),
 
     equipmentInfo: {
-      all: 0,
-      offline: 0,
-      warning: 0,
-      earlyWarning: 0,
+      all: {},
+      online: {},
+      offline: {},
+      warning: {},
+      earlyWarning: {},
     },
     listTitles: [],
     warnList: [],
@@ -78,10 +79,11 @@ export default {
         const list = (data.widget || {}).list || [];
         if (list.length > 0) {
           const info = {
-            all: list[0].val,
-            offline: list[1].val,
-            warning: list[2].val,
-            earlyWarning: list[3].val,
+            all: (list.find(x => x.title == "所有设备总数") || {}),
+            online: (list.find(x => x.title == "在线设备总数") || {}),
+            offline: (list.find(x => x.title == "离线设备总数") || {}),
+            warning: (list.find(x => x.title == "报警设备总数") || {}),
+            earlyWarning: (list.find(x => x.title == "预警设备总数") || {}),
           }
 
           return {
@@ -102,8 +104,8 @@ export default {
       else if (data.msgid == "22") {
         let positions = [];
         data.widget.list.filter(x => {
-          x.longitude = x.lng;
-          x.latitude = x.lat;
+          x.longitude = x.lat;
+          x.latitude = x.lng;
           positions.push({position: x});
         });
 

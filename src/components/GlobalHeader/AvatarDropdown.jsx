@@ -11,7 +11,9 @@ class AvatarDropdown extends React.Component {
       date: moment(new Date()).format("YYYY年MM月DD日"),
       time: moment(new Date()).format("HH:mm:ss"),
     }
+  }
 
+  componentDidMount() {
     setInterval(() => {
       this.setState({
         date: moment(new Date()).format("YYYY年MM月DD日"),
